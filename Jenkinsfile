@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Clone repo') {
             steps {
-                git 'https://github.com/pleszkowska/egg-timer-app.git'
+                git branch: 'main', url: 'https://github.com/pleszkowska/egg-timer-app.git'
             }
         }
 
