@@ -21,7 +21,7 @@ pipeline {
 
         stage('Stop Previous Container') {
             steps {
-                sh """
+                bat """
                     docker rm -f $CONTAINER_NAME || true
                 """
             }
@@ -29,7 +29,7 @@ pipeline {
 
         stage('Run Container') {
             steps {
-                sh """
+                bat """
                     docker run -d -p 8080:80 --name $CONTAINER_NAME $IMAGE_NAME
                 """
             }
