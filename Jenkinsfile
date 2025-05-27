@@ -30,7 +30,7 @@ pipeline {
         stage('Run Container') {
             steps {
                 bat """
-                    docker run -d -p 8080:80 --name $CONTAINER_NAME $IMAGE_NAME
+                    docker run -d -p 8081:80 --name $CONTAINER_NAME $IMAGE_NAME
                 """
             }
         }
