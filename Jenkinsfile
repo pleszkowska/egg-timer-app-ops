@@ -13,6 +13,14 @@ pipeline {
             }
         }
 
+        stage('Docker Login') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    bat 'docker login -u %DOCKER_USER% -p %DOCKER_PASS%'
+                }
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t %IMAGE_NAME% .'
@@ -21,24 +29,20 @@ pipeline {
 
         stage('Stop Previous Container') {
             steps {
-                bat """
-                    docker rm -f $CONTAINER_NAME || true
-                """
+                bat 'docker rm -f %CONTAINER_NAME% || exit 0'
             }
         }
 
         stage('Run Container') {
             steps {
-                bat """
-                    docker run -d -p 8081:80 --name $CONTAINER_NAME $IMAGE_NAME
-                """
+                bat 'docker run -d -p 8081:80 --name %CONTAINER_NAME% %IMAGE_NAME%'
             }
         }
     }
 
     post {
         success {
-            echo "Egg timer is running at http://localhost:8080/"
+            echo "Egg timer is running at http://localhost:8081/"
         }
     }
 }
