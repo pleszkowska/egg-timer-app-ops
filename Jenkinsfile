@@ -76,6 +76,6 @@ pipeline {
             body: "The pipeline failed. Please check the Jenkins console output.",
             to: 'leszpaul3@gmail.com',
             mimeType: 'text/plain'
-        )
-    }  
-}
+         )
+     }  
+ }
