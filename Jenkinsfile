@@ -77,6 +77,5 @@ pipeline {
             to: 'leszpaul3@gmail.com',
             mimeType: 'text/plain'
         )
-    }
+    }  
 }
-  
